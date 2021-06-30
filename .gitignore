@@ -1,0 +1,5 @@
+# used for test files
+./test/
+
+# build output
+./dist/
