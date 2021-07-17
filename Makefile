@@ -1,7 +1,8 @@
 GO ?= go
 
 .PHONY: build
-build:
+build: download-dependencies
+	echo "Building..."
 	$(GO) build -v -o dist/magnet-watch ./main.go
 
 .PHONY: clean
@@ -12,9 +13,9 @@ clean:
 .PHONY: download-dependencies
 download-dependencies:
 	echo "Downloading dependencies"
-	$(GO) mod download .
+	$(GO) mod download
 
 .PHONY: cleanup-dependencies
 cleanup-dependencies:
 	echo "Cleaning up dependencies"
-	$(GO) mod tidy .
+	$(GO) mod tidy

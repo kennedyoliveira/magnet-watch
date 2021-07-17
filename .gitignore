@@ -1,5 +1,5 @@
 # used for test files
-./test/
+test/
 
 # build output
-./dist/
+dist/
