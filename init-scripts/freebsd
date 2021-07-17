@@ -1,0 +1,25 @@
+#!/bin/sh
+#
+# Author Kennedy Oliveira <kennedyroliveira@gmail.com>
+#
+# PROVIDE: magnet_watch
+# REQUIRE: LOGIN
+# KEYWORD: shutdown
+
+. /etc/rc.subr
+
+name="magnet_watch"
+rcvar=${name}_enable
+
+load_rc_config $name
+
+: ${magnet_watch_enable="NO"}
+: ${magnet_watch_user:="magnet_watch"}
+: ${magnet_watch_data_dir:="/usr/local/magnet-watch/"}
+
+pidfile="${magnet_watch_data_dir}/magnet-watch.pid"
+procname="/usr/local/magnet-watch/dist/magnet-watch"
+command="/usr/sbin/daemon"
+command_args="-p ${pidfile} -o ${magnet_watch_data_dir}/logs/log.txt ${procname} -transmission-url 'http://localhost:9091/' -directory '/mnt/torrent-black-hole/' "
+
+run_rc_command "$1"
