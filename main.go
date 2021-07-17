@@ -11,6 +11,7 @@ import (
 	"os/signal"
 	"path"
 	"regexp"
+	"strings"
 	"syscall"
 	"time"
 )
@@ -60,7 +61,7 @@ func main() {
 	log.Printf("Watching for magnet links at directory %s", dirToWatch)
 	log.Printf("Matching files with pattern: %s", *fileNamePattern)
 
-	url := fmt.Sprintf("%s%s", *transmissionUrl, *transmissionApiPath)
+	url := fmt.Sprintf("%s%s", strings.TrimRight(*transmissionUrl, "/"), *transmissionApiPath)
 
 	conf := transmission.Config{
 		Address:  url,
@@ -70,13 +71,13 @@ func main() {
 
 	transmissionClient, err := transmission.New(conf)
 	if err != nil {
-		log.Fatal(err)
+		log.Fatal("Failed to initialize transmission client, check your configuration:", err)
 	}
 
 	// verify the connection to transmission is working
 	_, err = transmissionClient.GetTorrents()
 	if err != nil {
-		log.Fatalln(err)
+		log.Fatalln("Failed to connect to transmission, check your configurations and authentication:", err)
 	}
 
 	filesToProcess := make(chan string, 1024)
@@ -89,7 +90,7 @@ func main() {
 	w.AddFilterHook(watcher.RegexFilterHook(fileNameRegex, false))
 
 	if err := w.AddRecursive(dirToWatch); err != nil {
-		log.Fatalln(err)
+		log.Fatalln("Failed to add directory", dirToWatch, "to monitoring", err)
 	}
 
 	// monitor the folders

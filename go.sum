@@ -1,0 +1,4 @@
+github.com/odwrtw/transmission v0.0.0-20201126103959-294af39dc919 h1:b3PkKK5fyKbxVQ0qOerYAYaYuG+k2pFeSJftGax3hVM=
+github.com/odwrtw/transmission v0.0.0-20201126103959-294af39dc919/go.mod h1:o+HdjqpVQPFqVTG4jncidwE0/cQoAfCJ4JMFaB481xc=
+github.com/radovskyb/watcher v1.0.7 h1:AYePLih6dpmS32vlHfhCeli8127LzkIgwJGcwwe8tUE=
+github.com/radovskyb/watcher v1.0.7/go.mod h1:78okwvY5wPdzcb1UYnip1pvrZNIVEIh/Cm+ZuvsUYIg=
