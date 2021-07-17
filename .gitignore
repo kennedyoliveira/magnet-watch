@@ -3,3 +3,6 @@ test/
 
 # build output
 dist/
+
+# logs during tests
+logs/
